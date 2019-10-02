@@ -9,6 +9,7 @@ class NewsController extends Controller
 {
     public function add()
     {
+        // admin/newsディレクトリ配下のcreate.blade.phpというファイルを呼び出す
         return view('admin.news.create');
     }
     
