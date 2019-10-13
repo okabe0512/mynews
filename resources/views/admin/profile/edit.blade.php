@@ -34,7 +34,7 @@
                                     <div class="form-group row">
                                         <label class="col-md-2" for="gender">男</label>
                                             <div class="col-md-10">
-                                                <input type="radio" class="radio" name="gender" value="男性">
+                                                <input type="radio" class="radio" name="gender" value="{{ $profile_form->gender }}">
                                 
                                             </div>
                                     </div>
@@ -42,7 +42,7 @@
                                     <div class="form-group row">
                                         <label class="col-md-2" for="gender">女</label>
                                             <div class="col-md-10">
-                                                <input type="radio" class="radio" name="gender" value="女性">
+                                                <input type="radio" class="radio" name="gender" value="{{ $profile_form->gender }}">
                                             </div>
                                     </div>
                             </div>
@@ -50,14 +50,14 @@
                             <div class="form-group row">
                                 <label class="col-md-2" for="title">趣味</label>
                                     <div class="col-md-10">
-                                        <input type="text" class="form-control" name="hobby" value="{{ old('hobby') }}">
+                                        <input type="text" class="form-control" name="hobby" value="{{ $profile_form->hobby }}">
                                     </div>
                             </div>
                     
                             <div class="form-group row">
                                 <label class="col-md-2" for="title">自己紹介欄</label>
                                     <div class="col-md-10">
-                                        <textarea class="form-control" name="introduction" rows="20">{{ old('introduction') }}</textarea>
+                                        <textarea class="form-control" name="introduction" rows="20"> "{{ $profile_form->introduction }}"</textarea>
                                     </div>
                             </div>
                             
@@ -69,9 +69,8 @@
                                 </div>
                             </div>
                             
-                        </form>
+                    </form>
             
-                
             </div>
         </div>
     </div>
