@@ -20,18 +20,17 @@ class ProfileController extends Controller
     
        $this->validate($request, Profile::$rules);
 
-      $news = new Profile;
+      $profile = new Profile;
       $form = $request->all();
 
       
       // フォームから送信されてきた_tokenを削除する
       unset($form['_token']);
-      // フォームから送信されてきたimageを削除する
-      unset($form['image']);
+
 
       // データベースに保存する
-      $news->fill($form);
-      $news->save();
+      $profile->fill($form);
+      $profile->save();
       
       return redirect('admin/profile/create');
       
@@ -54,11 +53,11 @@ class ProfileController extends Controller
     public function edit(Request $request)
     {
       // Profile Modelからデータを取得する
-      $news = Profile::find($request->id);
-      if (empty($news)) {
+      $profile = Profile::find($request->id);
+      if (empty($profile)) {
         abort(404);    
       }
-      return view('admin.profile.edit', ['news_form' => $news]);
+      return view('admin.profile.edit', ['profile_form' => $profile]);
     }
 
 
@@ -67,23 +66,23 @@ class ProfileController extends Controller
       // Validationをかける
       $this->validate($request, Profile::$rules);
       // Profile Modelからデータを取得する
-      $news = Profile::find($request->id);
+      $profile = Profile::find($request->id);
       // 送信されてきたフォームデータを格納する
-      $news_form = $request->all();
+      $profile_form = $request->all();
       
       if (isset($news_form['image'])) {
         $path = $request->file('image')->store('public/image');
-        $news->image_path = basename($path);
-        unset($news_form['image']);
+        $profile->image_path = basename($path);
+        unset($profile_form['image']);
       } elseif (isset($request->remove)) {
-        $news->image_path = null;
-        unset($news_form['remove']);
+        $profile->image_path = null;
+        unset($profile_form['remove']);
       }
       
-      unset($news_form['_token']);
+      unset($profile_form['_token']);
 
       // 該当するデータを上書きして保存する
-      $news->fill($news_form)->save();
+      $profile->fill($profile_form)->save();
 
       return redirect('admin/profile');
     }
@@ -91,9 +90,9 @@ class ProfileController extends Controller
     public function delete(Request $request)
     {
       // 該当するProfile Modelを取得
-      $news = Profile::find($request->id);
+      $profile = Profile::find($request->id);
       // 削除する
-      $news->delete();
+      $profile->delete();
       return redirect('admin/profile/');
     }  
 }
