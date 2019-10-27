@@ -7,6 +7,9 @@ use App\Http\Controllers\Controller;
 
 use App\Profile;
 
+use App\ProfileHistory;
+use Carbon\Carbon;
+
 class ProfileController extends Controller
 {
     
@@ -67,11 +70,18 @@ class ProfileController extends Controller
       }
       
       unset($profile_form['_token']);
-
+      unset($profile_form['image']);
+      unset($profile_form['remove']);
       // 該当するデータを上書きして保存する
       $profile->fill($profile_form)->save();
+      
+      $profile_history = new ProfileHistory;
+      $profile_history->profile_id = $profile->id;
+      $profile_history->edited_at = Carbon::now();
+      $profile_history->save();
 
-      return view('admin.profile.edit', ['profile_form' => $profile]);
+      
+      return redirect() ->route('admim.profile.edit',['id'=>$request->id]);
     }
     
 }
