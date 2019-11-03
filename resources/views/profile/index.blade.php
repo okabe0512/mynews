@@ -44,7 +44,7 @@
                                     {{ str_limit($profile->hobby, 20) }}
                                 </div>
                                 <div class="introduction">
-                                    {{ str_limit($profile->introduction, 100) }}
+                                    {{ str_limit($profile->introduction, 20) }}
                                 </div>
                                 
                                 
